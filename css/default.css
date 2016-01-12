@@ -1,0 +1,125 @@
+body {
+  font-size: 26px;
+}
+.clock {
+    font-family:"Orbitron";
+    font-size:3em;
+    display:inline-block;
+}
+.clock div {
+  display:inline-block;
+}
+.clock.analog {
+  width:6em;
+  height:6em;
+  background-color:#ccc;
+  border-radius:100%;
+  border: .05em #333 solid;
+  position:relative;
+}
+.clock.analog::after {
+  content: "";
+  display:inline-block;
+  position:absolute;
+  border-radius:100%;
+  top:48%;
+  left:48%;
+  width:4%;
+  height:4%;
+  background-color: #333;
+  z-index:4;
+}
+.clock.analog .seconds,
+.clock.analog .minutes,
+.clock.analog .hours {
+  position: absolute;
+  z-index:3;
+}
+.clock.analog .seconds {
+  top: 0;
+  left: 2.98em;
+  width: 0.04em;
+  height: 6em;
+}
+.clock.analog .minutes {
+  top: 0;
+  left: 2.95em;
+  width:.1em;
+  height:6em;
+}
+.clock.analog .hours {
+  top: 1em;
+  left: 2.9em;
+  width: 0.2em;
+  height:4em;
+}
+.clock.analog .hand {
+  z-index:2;
+  position: relative;
+  width:100%;
+  height:50%;
+}
+.clock.analog .seconds .hand {
+  background-color: #53a;
+}
+.clock.analog .minutes .hand {
+  background-color: #a35;
+}
+.clock.analog .hours .hand {
+  background-color: #3a5;
+}
+.clock.analog .label {
+  font-size:  0.5em;
+  position: absolute;
+  text-align: center;
+  font-weight:bold;
+  width:  10%;
+}
+.clock.analog .label:nth-child(12){
+  top:    2.5%;
+  left:   45%;
+}
+.clock.analog .label:nth-child(1){
+  top:      7.5%;
+  right:    24%;
+}
+.clock.analog .label:nth-child(2){
+  top:      24%;
+  right:    6%;
+}
+.clock.analog .label:nth-child(3){
+  top:      47%;
+  right:    0;
+}
+.clock.analog .label:nth-child(4){
+  bottom:     24%;
+  right:    6%;
+}
+.clock.analog .label:nth-child(5){
+  bottom:     7.5%;
+  right:    22%;
+}
+.clock.analog .label:nth-child(6) {
+  bottom:   1%;
+  left:     45%;
+}
+.clock.analog .label:nth-child(7){
+  bottom:     7.5%;
+  left:   22%;
+}
+.clock.analog .label:nth-child(8){
+  bottom:     24%;
+  left:   6%;
+}
+.clock.analog .label:nth-child(9){
+  top:      47%;
+  left:     2%;
+}
+.clock.analog .label:nth-child(10){
+  top:      24%;
+  left:     7%;
+}
+.clock.analog .label:nth-child(11){
+  top:      7.5%;
+  left:   24%;
+}
