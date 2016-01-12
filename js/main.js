@@ -1,5 +1,25 @@
 var myDate
 
+$(document).ready(function(){
+
+    myDate = new Date();
+
+    // Run Digital Clock
+    $("#digital_clock .seconds").text(zPad(myDate.getSeconds()));
+    $("#digital_clock .minutes").text(zPad(myDate.getMinutes()));
+    $("#digital_clock .hours").text(zPad(parseInt(myDate.getHours())%12));
+
+    setInterval(function(){ incrementClockText($("#digital_clock")) }, 1000 );
+    
+    // Run Analog Clocks
+    initializeHands($("#analog_clock"),"data-value");
+    initializeHands($("#second_analog_clock"),"data-value");
+    initializeHands($("#third_analog_clock"),"data-value");
+    initializeHands($("#fourth_analog_clock"),"data-value");
+    initializeHands($("#fifth_analog_clock"),"data-value");
+
+});
+
 function incrementClockText( element ) {
   var s = parseInt($(".seconds", element).text());
   var m = parseInt($(".minutes", element).text());
@@ -27,6 +47,9 @@ function incrementClock( element, attr ) {
   var s = parseInt($(".seconds", element).attr(attr));
   var m = parseInt($(".minutes", element).attr(attr));
   var h = parseInt($(".hours", element).attr(attr));
+  //default attr of "data-value"
+  attr = typeof attr !== "undefined" ? attr : "data-value";
+
   if( s < 59 ) {
     $(".seconds", element).attr( attr, zPad(s+1) );
   } else {
@@ -49,43 +72,7 @@ function incrementClock( element, attr ) {
   rotateHand( $(".seconds", element), $(".seconds",element).attr(attr), "60" );
 }
 
-
-$(document).ready(function(){
-
-    myDate = new Date();
-    //$("#digital_clock").html(myDate);
-
-    $("#digital_clock .seconds").text(zPad(myDate.getSeconds()));
-    $("#digital_clock .minutes").text(zPad(myDate.getMinutes()));
-    $("#digital_clock .hours").text(zPad(parseInt(myDate.getHours())%12));
-
-
-
-    setInterval(function(){ incrementClockText($("#digital_clock")) }, 1000 );
-    
-
-    initializeHands($("#analog_clock"),"data-value");
-    initializeHands($("#second_analog_clock"),"data-value");
-    initializeHands($("#third_analog_clock"),"data-value");
-    initializeHands($("#fourth_analog_clock"),"data-value");
-    initializeHands($("#fifth_analog_clock"),"data-value");
-    //    parseInt($("#digital_clock .seconds").text() ) + 1 ) },
-    //    1000);
-    // setInterval(function(){ $("#digital_clock .seconds").text( 
-    //    parseInt($("#digital_clock .seconds").text() ) + 1 ) },
-    //    1000);
-    // setInterval(function(){ $("#digital_clock .minutes").text(
-    //    parseInt($("#digital_clock .minutes").text() ) + 1 ) },
-    //    60000);
-    // setInterval(function(){ $("#digital_clock .hours").text(
-    //    parseInt($("#digital_clock .hours").text() ) + 1 ) },
-    //    3600000);
-
-
-});
-
 function rotateHand( element, val, max ) {
-  console.log( "element: " + element + "; val: " + val + " max: " + max );
   $(element).css("transform","rotate("+((val/max)*360)+"deg)");
 }
 

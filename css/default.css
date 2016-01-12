@@ -37,21 +37,21 @@ body {
 }
 .clock.analog .seconds {
   top: 0;
-  left: 2.98em;
-  width: 0.04em;
-  height: 6em;
+  left: 49.67%; /* 2.98em; */
+  width: 0.67%; /* 0.04em; */
+  height: 100%; /* 6em; */
 }
 .clock.analog .minutes {
   top: 0;
-  left: 2.95em;
-  width:.1em;
-  height:6em;
+  left: 49.167%; /* 2.95em; */
+  width: 1.67%; /* .1em; */
+  height: 100%; /* 6em; */
 }
 .clock.analog .hours {
-  top: 1em;
-  left: 2.9em;
-  width: 0.2em;
-  height:4em;
+  top: 16.67%; /* 1em; */
+  left: 48.33%; /* 2.9em; */
+  width: 3.33%; /* 0.2em; */
+  height: 66.67%; /* 4em; */
 }
 .clock.analog .hand {
   z-index:2;
