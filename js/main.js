@@ -1,8 +1,15 @@
-var myDate
+/* Returns a date shifted a certain offset 
+ * @param offset the UTC hour offset to shift
+ * @returns new date object shifted the UTC amount
+ */
+Date.prototype.getOffsetDate = function( offset ) {
+  utc = this.getTime() + (this.getTimezoneOffset() * 60000);
+  return new Date(utc + (3600000*offset));
+}
 
 $(document).ready(function(){
 
-    myDate = new Date();
+    var myDate = new Date();
 
     // Run Digital Clock
     $("#digital_clock .seconds").text(zPad(myDate.getSeconds()));
@@ -12,11 +19,11 @@ $(document).ready(function(){
     setInterval(function(){ incrementClockText($("#digital_clock")) }, 1000 );
     
     // Run Analog Clocks
-    initializeHands($("#analog_clock"),"data-value");
-    initializeHands($("#second_analog_clock"),"data-value");
-    initializeHands($("#third_analog_clock"),"data-value");
-    initializeHands($("#fourth_analog_clock"),"data-value");
-    initializeHands($("#fifth_analog_clock"),"data-value");
+    initializeHands({element: $("#analog_clock"), date: myDate } )
+    initializeHands({element: $("#second_analog_clock"), date: myDate.getOffsetDate(-7)});
+    initializeHands({element: $("#third_analog_clock"), date: myDate.getOffsetDate(-4)});
+    initializeHands({element: $("#fourth_analog_clock"), date: myDate.getOffsetDate(2)});
+    initializeHands({element: $("#fifth_analog_clock"), date: myDate.getOffsetDate(8)});
 
 });
 
@@ -76,7 +83,11 @@ function rotateHand( element, val, max ) {
   $(element).css("transform","rotate("+((val/max)*360)+"deg)");
 }
 
-function initializeHands( element, attr ) {
+function initializeHands( options ) {
+  var element = (typeof options.element !== "undefined") ? options.element : null;
+  var attr = (typeof options.attr !== "undefined") ? options.attr : "data-value";
+  var date = (typeof options.date !== "undefined") ? options.date : new Date();
+
   var internalContents = "";
   internalContents += "<div class=\"minutes\"><div class=\"hand\"></div></div>\n";
   internalContents += "<div class=\"hours\"><div class=\"hand\"></div></div>\n";
@@ -98,9 +109,9 @@ function initializeHands( element, attr ) {
     
   $(element).append(internalContents);
 
-  $(".seconds", element).attr("data-value", zPad(myDate.getSeconds()));
-  $(".minutes", element).attr("data-value", zPad(myDate.getMinutes()));
-  $(".hours", element).attr("data-value", zPad(myDate.getHours()));
+  $(".seconds", element).attr(attr, zPad(date.getSeconds()));
+  $(".minutes", element).attr(attr, zPad(date.getMinutes()));
+  $(".hours", element).attr(attr, zPad(date.getHours()));
 
   setInterval(function(){ incrementClock(element,attr) }, 1000 );
 
